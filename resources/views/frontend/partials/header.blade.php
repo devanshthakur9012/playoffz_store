@@ -1,102 +1,87 @@
+<style>
+    .cat-list-wrapper {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .cat-list {
+        margin: 0 5px;
+        padding: 0;
+        list-style: none;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        scroll-behavior: smooth;
+    }
+    .cat-list li {
+        display: inline-block;
+    }
+    .cat-list li a {
+        color: #333;
+        font-weight: 500;
+        padding: 7px 15px;
+    }
+    .scroll-btn {
+        background: transparent;
+        border: none;
+        color: #a7a7a7;
+        z-index: 10;
+    }
+</style>
 
-	<header class="header">
-		<!--Top Header-->
-		<div class="top-header">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-						@if($gtext['is_publish'] == 1)
-						<ul class="top-list-1">
-							@if($gtext['address'] != '')
-							<li><i class="bi bi-geo-alt"></i>{{ $gtext['address'] }}</li>
-							@endif
-							@if($gtext['phone'] != '')
-							<li><i class="bi bi-telephone"></i>{{ $gtext['phone'] }}</li>
-							@endif
-						</ul>
-						@endif
-					</div>
-					<div class="col-lg-6">
-						<ul class="top-list">
-							<li><a href="{{ route('frontend.order-tracking') }}"><i class="bi bi-geo"></i>{{ __('Order Tracking') }}</a></li>
-							@auth
-							<li>
-								<div class="btn-group language-menu">
-									<a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-										{{ Auth::user()->name }}
-									</a>
-									<ul class="dropdown-menu dropdown-menu-end">
-										<li><a class="dropdown-item" href="{{ route('frontend.my-dashboard') }}">{{ __('My Dashboard') }}</a></li>
-										<li><a class="dropdown-item" href="{{ route('logout') }}"
-										onclick="event.preventDefault();
-										document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-											@csrf
-										</form>
-										</li>
-									</ul>
-								</div>
-							</li>
-							@else
-							@if (Route::has('frontend.register'))
-							<li><a href="{{ route('frontend.register') }}"><i class="bi bi-person-plus"></i>{{ __('Register') }}</a></li>
-							@endif
-							@if (Route::has('login'))
-							<li><a href="{{ route('frontend.login') }}"><i class="bi bi-person"></i>{{ __('Sign in') }}</a></li>
-							@endif
-							@endauth
-							
-							@if($gtext['is_language_switcher'] == 1)
-							<li>
-								@php echo language(); @endphp
-							</li>
-							@endif
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div><!--/Top Header/-->
-		
+<header class="header">
 		<!--Desktop Header-->
 		<div class="header-desktop">
-			<div class="container">
+			<div class="container-fluid px-5">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 						<div class="logo">
 							<a href="{{ url('/') }}">
 								<img src="{{ $gtext['front_logo'] ? asset('public/media/'.$gtext['front_logo']) : asset('public/frontend/images/logo.png') }}" alt="logo">
 							</a>
 						</div>
 					</div>
-					<div class="col-lg-5">
-						<form method="GET" action="{{ route('frontend.search') }}">
-							<div class="search-card">
-								<div class="search-box">
-									<input name="search" type="text" class="form-control" placeholder="{{ __('Search for Products') }}..." required />
-								</div>
-								<div class="cat-select">
-									<select class="form-select" name="category">
-										<option value="">{{ __('All Categories') }}</option>
-										@php echo CategoryListOption(); @endphp
-									</select>
-								</div>
-								<div class="search-btn">
-									<button type="submit" class="btn btn-search"><i class="bi bi-search"></i></button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="col-lg-4">
+                    <div class="col-lg-8 align-self-center">
+                        <div class="cat-list-wrapper">
+                            <button class="scroll-btn left" onclick="scrollList(-1)"><i class="bi bi-chevron-left"></i></button>
+                            <ul class="cat-list" id="cat-list">
+                                @foreach(CategoryList() as $cat)
+                                    <li>
+                                        <a href="{{route('frontend.product-category', [$cat->id, $cat->slug])}}">{{$cat->name}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <button class="scroll-btn right" onclick="scrollList(1)"><i class="bi bi-chevron-right"></i></button>
+                        </div>
+                    </div>
+					<div class="col-lg-2">
 						<ul class="head-round-icon">
 							<li>
+								<a href="#">
+									<i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#searchModal"></i>
+								</a>
+							</li>
+                            <li>
+                                @auth
+                                    <a href="{{ route('frontend.my-dashboard') }}">
+                                        <i class="bi bi-person"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('frontend.login') }}">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                    </a>
+                                @endauth
+							</li>
+                            <li>
 								<a href="{{ route('frontend.wishlist') }}">
-									<i class="bi bi-heart"></i>{{ __('Wishlist') }}
+									<i class="bi bi-heart"></i>
 									<span class="cart_count count_wishlist">0</span>
 								</a>
 							</li>
 							<li class="shopingCart">
 								<a href="javascript:void(0);" class="CartShowHide">
-									<i class="bi bi-cart"></i>{{ __('Cart') }}
+									<i class="bi bi-cart"></i>
 									<span class="cart_count total_qty">0</span>
 								</a>
 								<div class="shoping-cart-card headerShopingCart">
@@ -106,11 +91,11 @@
 										</div>
 										<h3>{{ __('Your cart is empty!') }}</h3>
 									</div>
-									
+
 									<div class="shoping-cart-body has_cart_item">
 										<ul class="cart_list" id="tp_cart_data"></ul>
 									</div>
-									
+
 									<div class="shoping-cart-footer has_cart_item">
 										<p>{{ __('Subtotal') }}<span class="sub_total">0</span></p>
 										<p>{{ __('Tax') }}<span class="tax">0</span></p>
@@ -118,7 +103,7 @@
 										<a href="{{ route('frontend.cart') }}" class="btn view-cart-btn">{{ __('View Cart') }}</a>
 										<a href="{{ route('frontend.checkout') }}" class="btn checkout-btn">{{ __('Checkout') }}</a>
 									</div>
-									
+
 								</div>
 							</li>
 						</ul>
@@ -126,7 +111,7 @@
 				</div>
 			</div>
 		</div><!--/Desktop Header/-->
-		
+
 		<!--Mobile Header-->
 		<div class="header-mobile" id="sticky-header">
 			<div class="container">
@@ -152,6 +137,17 @@
 							</div>
 							<div class="head-round-card">
 								<ul class="head-round-icon">
+                                    <li>
+                                        @auth
+                                            <a href="{{ route('frontend.my-dashboard') }}">
+                                                <i class="bi bi-person"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('frontend.login') }}">
+                                                <i class="bi bi-box-arrow-in-right"></i>
+                                            </a>
+                                        @endauth
+                                    </li>
 									<li>
 										<a href="{{ route('frontend.wishlist') }}">
 											<i class="bi bi-heart"></i>
@@ -164,18 +160,18 @@
 											<span class="cart_count total_qty">0</span>
 										</a>
 										<div class="shoping-cart-card headerShopingCart">
-											
+
 											<div class="empty_card has_item_empty">
 												<div class="empty_img">
 													<img src="{{ asset('public/frontend/images/empty.png') }}" />
 												</div>
 												<h3>{{ __('Your cart is empty!') }}</h3>
 											</div>
-											
+
 											<div class="shoping-cart-body has_cart_item">
 												<ul class="cart_list" id="tp_cart_data_for_mobile"></ul>
 											</div>
-											
+
 											<div class="shoping-cart-footer has_cart_item">
 												<p>{{ __('Subtotal') }}<span class="sub_total">0</span></p>
 												<p>{{ __('Tax') }}<span class="tax">0</span></p>
@@ -192,36 +188,6 @@
 				</div>
 			</div>
 		</div><!--/Mobile Header/-->
-		
-		<!--Menu-->
-		<div class="header-menu" id="sticky-menu">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-3">
-						<ul class="categories-wrap">
-							<li>
-								<a class="navCategoryListActive" href="javascript:void(0);">{{ __('Browse Categories') }}</a>
-								<ul class="nav-category-list">
-									@php echo CategoryMenuList(); @endphp
-									<li><a href="javascript:void(0);" class="btn cat-more-btn catMoreBtnActive"><span class="onCatMoreBtn">{{ __('Show More') }}</span></a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<div class="col-lg-9">
-						<div class="tp-mega-full">
-							<div class="tp-menu align-self-center">
-								<nav>
-									<ul class="main-menu">
-										@php echo HeaderMenuList('HeaderMenuListForDesktop'); @endphp
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/Menu/-->
 	</header>
 
 	<!-- off-canvas menu start -->
@@ -237,7 +203,7 @@
 				<form method="GET" action="{{ route('frontend.search') }}">
 					<input name="search" type="text" class="form-control" placeholder="{{ __('Search for Products') }}..." required />
 					<button type="submit" class="btn theme-btn"><i class="bi bi-search"></i>{{ __('Search') }}</button>
-				</form>	
+				</form>
 			</div>
 			<div class="mobile-navigation">
 				<nav>
@@ -254,3 +220,39 @@
 		</div>
 	</aside>
 	<!-- /off-canvas menu start -->
+
+
+<!-- Search Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">{{ __('Search Products') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 80px">
+                <form method="GET" action="{{ route('frontend.search') }}">
+                    <div class="input-group">
+                        <input style="border-radius: 25px 0 0 25px" name="search" type="text" class="form-control" placeholder="{{ __('Search for Products') }}..." required/>
+                        <select class="form-select" name="category">
+                            <option value="">{{ __('All Categories') }}</option>
+                            @php echo CategoryListOption(); @endphp
+                        </select>
+                        <button type="submit" class="btn btn-search btn-primary"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function scrollList(direction) {
+        const list = document.getElementById('cat-list');
+        const scrollAmount = 100;
+        list.scrollLeft += direction * scrollAmount;
+    }
+</script>
+
