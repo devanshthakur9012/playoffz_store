@@ -2272,6 +2272,7 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 .review-heading h4 {
 	margin: 0px;
 	font-size: 18px;
+    color: var(--color-gray-400);
 }
 .review-body {}
 .review-body .review-card {

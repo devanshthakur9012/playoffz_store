@@ -211,6 +211,12 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="review-form">
+                                                <div class="rating-wrap mb-4">
+                                                    <div class="stars-outer">
+                                                        <div class="stars-inner" style="width:{{ $data->ReviewPercentage }}%;"></div>
+                                                    </div>
+                                                    <span class="rating-count">({{ $data->TotalReview }})</span>
+                                                </div>
 												<h4>{{ __('Submit your review') }}</h4>
 												<p>Please <a href="{{ route('frontend.login') }}"><strong>login</strong></a> to write review!</p>
 												<div class="form-product-review">
