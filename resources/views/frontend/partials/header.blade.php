@@ -38,8 +38,7 @@
 					<div class="col-lg-2">
 						<div class="logo">
 							<a href="{{ url('/') }}">
-                                <img src="https://shop.playoffz.in/public/media/09022025054603-400x400-PlayOffz Store logo (1).png" alt="logo">
-{{--								<img src="{{ $gtext['front_logo'] ? asset('public/media/'.$gtext['front_logo']) : asset('public/frontend/images/logo.png') }}" alt="logo">--}}
+								<img src="{{ $gtext['front_logo'] ? asset('public/media/'.$gtext['front_logo']) : asset('public/frontend/images/logo.png') }}" alt="logo">
 							</a>
 						</div>
 					</div>
@@ -49,7 +48,7 @@
                             <ul class="cat-list" id="cat-list">
                                 @foreach(CategoryList() as $cat)
                                     <li>
-                                        <a href="">{{$cat->name}}</a>
+                                        <a href="{{route('frontend.product-category', [$cat->id, $cat->slug])}}">{{$cat->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -60,13 +59,19 @@
 						<ul class="head-round-icon">
 							<li>
 								<a href="#">
-									<i class="bi bi-search"></i>
+									<i class="bi bi-search" data-bs-toggle="modal" data-bs-target="#searchModal"></i>
 								</a>
 							</li>
                             <li>
-								<a href="{{ route('frontend.login') }}">
-									<i class="bi bi-person"></i>
-								</a>
+                                @auth
+                                    <a href="{{ route('frontend.my-dashboard') }}">
+                                        <i class="bi bi-person"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('frontend.login') }}">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                    </a>
+                                @endauth
 							</li>
                             <li>
 								<a href="{{ route('frontend.wishlist') }}">
@@ -132,6 +137,17 @@
 							</div>
 							<div class="head-round-card">
 								<ul class="head-round-icon">
+                                    <li>
+                                        @auth
+                                            <a href="{{ route('frontend.my-dashboard') }}">
+                                                <i class="bi bi-person"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('frontend.login') }}">
+                                                <i class="bi bi-box-arrow-in-right"></i>
+                                            </a>
+                                        @endauth
+                                    </li>
 									<li>
 										<a href="{{ route('frontend.wishlist') }}">
 											<i class="bi bi-heart"></i>
@@ -204,6 +220,32 @@
 		</div>
 	</aside>
 	<!-- /off-canvas menu start -->
+
+
+<!-- Search Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">{{ __('Search Products') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 80px">
+                <form method="GET" action="{{ route('frontend.search') }}">
+                    <div class="input-group">
+                        <input style="border-radius: 25px 0 0 25px" name="search" type="text" class="form-control" placeholder="{{ __('Search for Products') }}..." required/>
+                        <select class="form-select" name="category">
+                            <option value="">{{ __('All Categories') }}</option>
+                            @php echo CategoryListOption(); @endphp
+                        </select>
+                        <button type="submit" class="btn btn-search btn-primary"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script>
