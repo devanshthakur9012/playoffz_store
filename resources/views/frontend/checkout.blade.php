@@ -68,10 +68,10 @@ $tax_rate = $gtax['percentage'];
 				@csrf
 				<div class="row">
 					<div class="col-lg-7">
-						<h5>{{ __('Shipping Information') }}</h5>
+						<h5 class="text-white">{{ __('Shipping Information') }}</h5>
 						@auth
 						@else
-						<p>{{ __('Already have an account?') }} <strong><a href="{{ route('frontend.login') }}">{{ __('login') }}</a></strong></p>
+						<p>{{ __('Already have an account?') }} <strong><a class="text-primary" href="{{ route('frontend.login') }}">{{ __('login') }}</a></strong></p>
 						@endauth
 						<div class="row">
 							<div class="col-md-12">
@@ -165,7 +165,7 @@ $tax_rate = $gtax['percentage'];
 							</div>
 						</div>
 						
-						<h5 class="mt10">{{ __('Payment Method') }}</h5>
+						<h5 class="mt10 text-white">{{ __('Payment Method') }}</h5>
 						<div class="row">
 							<div class="col-md-12">
 								<span class="text-danger error-text payment_method_error"></span>
@@ -398,9 +398,9 @@ $tax_rate = $gtax['percentage'];
 													$shipping_fee = $row->shipping_fee.$gtext['currency_icon'];
 												}
 											@endphp
-											<div class="checkboxlist">
-												<label class="checkbox-title">
-													<input data-seller_count="{{ $SellerCount }}" data-shippingfee="{{ $row->shipping_fee }}" data-total="{{ NumberFormat($TotalPrice) }}" class="shipping_method" name="shipping_method" type="radio" value="{{ $row->id }}">{{ $row->title }} : {{ $shipping_fee }}
+											<div class="checkboxlist text-dark">
+												<label class="checkbox-title text-dark">
+													<input data-seller_count="{{ $SellerCount }}" data-shippingfee="{{ $row->shipping_fee }}" data-total="{{ NumberFormat($TotalPrice) }}" class="shipping_method text-dark" name="shipping_method" type="radio" value="{{ $row->id }}">{{ $row->title }} : {{ $shipping_fee }}
 												</label>
 											</div>
 										@endforeach

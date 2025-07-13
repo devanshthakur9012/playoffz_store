@@ -113,14 +113,14 @@ li {
 	list-style: none
 }
 p {
-	color: var(--color-gray-dark);
+	color: var(--color-white);
 	font-family: var(--primary-font-family);
 	font-size: var(--font-size-100);
 	font-weight: normal;
 	margin-bottom: 15px;
 }
 label {
-	color: var(--color-gray-dark);
+	color: var(--color-white);
 	cursor: pointer;
 	font-size: var(--font-size-100);
 	font-weight: 600;
@@ -847,7 +847,7 @@ ul.top-list-1 li i {
 	height: auto;
 	/* background: var(--color-light-green); */
 	background: var(--main-bg);
-	border: 1px solid var(--primary-bg);
+	border-bottom: 1px solid var(--primary-bg);
 	padding: 15px 0px;
 }
 .breadcrumb-section .page-title {
@@ -2188,16 +2188,17 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 .pr_details .product_title {
 	font-size: var(--font-size-300);
 	margin-bottom: 15px;
+	color: var(--warning-bg);
 }
 .pr_details .pr_widget {
 	margin-bottom: 10px;
 }
 .pr_details .pr_extra {
 	margin-bottom: 15px;
-	color: var(--color-black);
+	color: var(--color-white);
 }
 .pr_details .pr_extra a {
-	color: var(--theme-color);
+	color: var(--success-bg);
 }
 .pr_details .product_price {
 	display: flex;
@@ -2205,7 +2206,7 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 }
 .pr_details .product_price .item-price {
 	font-size: var(--font-size-300);
-	color: var(--color-black);
+	color: var(--color-white);
 	font-weight: 700;
 	margin-right: 10px;
 }
@@ -2257,7 +2258,7 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 	font-weight: 600;
 	line-height: 1;
 	padding: 0 15px 12px;
-	color: var(--color-black);
+	color: var(--color-white);
 	display: inline-block;
 	border-bottom: 2px solid transparent;
 }
@@ -2265,17 +2266,17 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 	padding: 0 15px 12px 0;
 }
 .desc-review-nav a.active {
-	color: var(--theme-color);
-	border-bottom: 2px solid var(--theme-color);
+	color: var(--primary-bg);
+	border-bottom: 2px solid var(--color-white);
 }
 .review-content p a {
-	color: var(--color-black);
+	color: var(--primary-bg);
 }
 .review-content p a:hover {
-	color: var(--theme-color);
+	color: var(--color-white);
 }
 .review-heading {
-	background: var(--color-light-green);
+	background: var(--color-white);
 	padding: 15px 15px;
 	margin: 30px 0px;
 	border-radius: 6px;
@@ -2283,7 +2284,7 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 .review-heading h4 {
 	margin: 0px;
 	font-size: 18px;
-    color: var(--color-gray-400);
+    color: var(--main-bg);
 }
 .review-body {}
 .review-body .review-card {
@@ -2326,6 +2327,7 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 	font-size: 14px;
 	font-weight: 600;
 	margin-bottom: 5px;
+	color: var(--main-bg);
 }
 .review-body .review-card .review-info .date {
 	color: var(--color-gray);
@@ -2353,8 +2355,12 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 	padding: 4px 5px 4px 5px;
 }
 .gritter-success .gritter-title .gritter-title-text {
-	background: var(--theme-color);
-	color: var(--color-white);
+	background: var(--main-bg);
+	color: var(--color-black);
+}
+.gritter-item{
+	background: var(--color-white);
+	color: var(--main-bg);
 }
 /* ======================
    Product Details Stores
@@ -2410,6 +2416,10 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 .store-content .stores-card .desc ul.info {
 	margin-top: 15px;
 	margin-bottom: 10px;
+	color: #01083e;
+}
+.review-form h4{
+	color: #fff;
 }
 .store-content .stores-card .desc ul.info li {
 	margin-bottom: 5px;
@@ -2506,9 +2516,9 @@ ul.widget-size li a {
 ul.widget-size li:hover a,
 ul.widget-size li.active a,
 ul.widget-size li.unit.active {
-	background: var(--theme-color);
-	color: var(--color-white);
-	border: 1px solid var(--theme-color);
+	background: var(--warning-bg);
+	color: var(--main-bg);
+	border: none;
 }
 
 /* ======================
@@ -2727,7 +2737,7 @@ ul.widget-size li.unit.active {
 	padding: 10px 15px;
 	font-weight: 700;
 	font-size: var(--font-size-200);
-	color: var(--color-black);
+	color: var(--color-white);
 }
 .carttotals-card .carttotals-body {
 	padding: 20px;
@@ -3376,6 +3386,7 @@ ul.errors-list li {
 	color: var(--color-white);
 	background: var(--main-bg);
 	border-radius: 50%;
+	border: 1px solid #fff;
 }
 .social-media i:hover {
 	color: var(--color-white);
