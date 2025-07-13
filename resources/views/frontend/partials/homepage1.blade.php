@@ -4,51 +4,9 @@
 	<section class="slider-section">
 		<div class="slider-screen h1-height">
 			<div class="home-slider owl-carousel">
-                <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:596,f_avif/dpr_1.5/image/vm/294a7a8b-8055-4b72-a4e1-df95b9ccdcbe.jpg" alt="">
-{{--				@foreach ($slider as $row)--}}
-{{--				@php $aRow = json_decode($row->desc); @endphp--}}
-{{--				<!-- Slider Item -->--}}
-{{--				<div class="single-slider">--}}
-{{--					<div class="container">--}}
-{{--						<div class="row">--}}
-{{--							<div class="order-1 col-sm-12 order-sm-1 col-md-6 order-md-0 col-lg-5 order-lg-0">--}}
-{{--								<div class="slider-content">--}}
-{{--									<h1>{{ $row->title }}</h1>--}}
-{{--									@if($aRow->sub_title != '')--}}
-{{--									<p class="relative">{{ $aRow->sub_title }}</p>--}}
-{{--									@endif--}}
-{{--									--}}
-{{--									@if($aRow->button_text != '')--}}
-{{--									<a href="{{ $row->url }}" class="btn theme-btn" {{ $aRow->target =='' ? '' : "target=".$aRow->target }}>{{ $aRow->button_text }}</a>--}}
-{{--									@endif--}}
-{{--									--}}
-{{--									@if($aRow->layer_image_1 != '')--}}
-{{--									<div class="h1-layer2 layer-bounce2">--}}
-{{--										<img src="{{ asset('media/'.$aRow->layer_image_1) }}" alt="{{ $row->title }}" />--}}
-{{--									</div>--}}
-{{--									@endif--}}
-{{--								</div>--}}
-{{--							</div>--}}
-{{--							<div class="order-0 col-sm-12 order-sm-0 col-md-6 order-md-1 col-lg-7 order-lg-1">--}}
-{{--								@if($aRow->layer_image_2 != '')--}}
-{{--								<div class="h1-layer3 layer-bounce3">--}}
-{{--									<img src="{{ asset('media/'.$aRow->layer_image_2) }}" alt="{{ $row->title }}" />--}}
-{{--								</div>--}}
-{{--								@endif--}}
-{{--								<div class="h1-layer1 layer-bounce1">--}}
-{{--									<img src="{{ asset('media/'.$row->image) }}" alt="{{ $row->title }}" />--}}
-{{--								</div>--}}
-{{--								@if($aRow->layer_image_3 != '')--}}
-{{--								<div class="h1-layer4 layer-bounce4">--}}
-{{--									<img src="{{ asset('media/'.$aRow->layer_image_3) }}" alt="{{ $row->title }}" />--}}
-{{--								</div>--}}
-{{--								@endif--}}
-{{--							</div>--}}
-{{--						</div>--}}
-{{--					</div>--}}
-{{--				</div>--}}
-{{--				<!-- /Slider Item/ -->--}}
-{{--				@endforeach--}}
+				@foreach ($slider as $row)
+					<img src="{{ asset('media/' . $row->image) }}" alt="{{ $row->title }}">
+				@endforeach
 			</div>
 		</div>
 	</section>
