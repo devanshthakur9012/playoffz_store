@@ -2362,6 +2362,9 @@ ul.nav-pills.tp-tabs .show > .nav-link {
 	background: var(--color-white);
 	color: var(--main-bg);
 }
+.gritter-without-image p{
+	color: var(--main-bg);
+}
 /* ======================
    Product Details Stores
    ====================== */
