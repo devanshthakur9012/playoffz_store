@@ -1,6 +1,6 @@
 <?php
 
-require_once 'resources/lang/custom/locales.php';
+$lan = ["lan" => "en"];
 
 return [
 

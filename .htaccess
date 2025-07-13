@@ -20,7 +20,12 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# php -- BEGIN cPanel-generated handler, do not edit
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
 <Files .env>
     Order allow,deny
     Deny from all
@@ -30,3 +35,11 @@
     Order allow,deny
     Deny from all
 </Files>
+
+<Files artisan>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Disable directory browsing
+Options -Indexes

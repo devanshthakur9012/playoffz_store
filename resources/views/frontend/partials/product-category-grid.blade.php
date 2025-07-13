@@ -18,7 +18,7 @@
 					@endif
                         <a class="addtowishlist" data-id="{{ $row->id }}" href="javascript:void(0);"><i class="bi bi-heart"></i></a>
 					<a href="{{ route('frontend.product', [$row->id, $row->slug]) }}">
-						<img src="{{ asset('public/media/'.$row->f_thumbnail) }}" alt="{{ $row->title }}" />
+						<img src="{{ asset('media/'.$row->f_thumbnail) }}" alt="{{ $row->title }}" />
 					</a>
 				</div>
                 <div class="item-sold">
@@ -51,7 +51,7 @@
 	<div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 col-xxl-4 offset-xxl-4">
 		<div class="empty_card">
 			<div class="empty_img">
-				<img src="{{ asset('public/frontend/images/empty.png') }}" />
+				<img src="{{ asset('frontend/images/empty.png') }}" />
 			</div>
 			<h3>{{ __('Oops! No product found.') }}</h3>
 		</div>

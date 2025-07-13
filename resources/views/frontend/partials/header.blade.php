@@ -18,7 +18,7 @@
         display: inline-block;
     }
     .cat-list li a {
-        color: #333;
+        color: #fff;
         font-weight: 500;
         padding: 7px 15px;
     }
@@ -28,33 +28,26 @@
         color: #a7a7a7;
         z-index: 10;
     }
+	.navbar-menu{
+	    background: var(--primary-bg);
+		display: flex;
+		justify-content: center;
+		padding: 6px 10px;
+	}
 </style>
 
 <header class="header">
 		<!--Desktop Header-->
 		<div class="header-desktop">
-			<div class="container-fluid px-5">
-				<div class="row">
+			<div class="container py-3">
+				<div class="row justify-content-between">
 					<div class="col-lg-2">
 						<div class="logo">
 							<a href="{{ url('/') }}">
-								<img src="{{ $gtext['front_logo'] ? asset('public/media/'.$gtext['front_logo']) : asset('public/frontend/images/logo.png') }}" alt="logo">
+								<img src="{{ $gtext['front_logo'] ? asset('media/'.$gtext['front_logo']) : asset('frontend/images/logo.png') }}" alt="logo">
 							</a>
 						</div>
 					</div>
-                    <div class="col-lg-8 align-self-center">
-                        <div class="cat-list-wrapper">
-                            <button class="scroll-btn left" onclick="scrollList(-1)"><i class="bi bi-chevron-left"></i></button>
-                            <ul class="cat-list" id="cat-list">
-                                @foreach(CategoryList() as $cat)
-                                    <li>
-                                        <a href="{{route('frontend.product-category', [$cat->id, $cat->slug])}}">{{$cat->name}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <button class="scroll-btn right" onclick="scrollList(1)"><i class="bi bi-chevron-right"></i></button>
-                        </div>
-                    </div>
 					<div class="col-lg-2">
 						<ul class="head-round-icon">
 							<li>
@@ -87,7 +80,7 @@
 								<div class="shoping-cart-card headerShopingCart">
 									<div class="empty_card has_item_empty">
 										<div class="empty_img">
-											<img src="{{ asset('public/frontend/images/empty.png') }}" />
+											<img src="{{ asset('frontend/images/empty.png') }}" />
 										</div>
 										<h3>{{ __('Your cart is empty!') }}</h3>
 									</div>
@@ -103,11 +96,21 @@
 										<a href="{{ route('frontend.cart') }}" class="btn view-cart-btn">{{ __('View Cart') }}</a>
 										<a href="{{ route('frontend.checkout') }}" class="btn checkout-btn">{{ __('Checkout') }}</a>
 									</div>
-
 								</div>
 							</li>
 						</ul>
 					</div>
+				</div>
+			</div>
+			<div class="navbar-menu">
+				<div class="cat-list-wrapper">
+					<ul class="cat-list" id="cat-list">
+						@foreach(CategoryList() as $cat)
+							<li>
+								<a href="{{route('frontend.product-category', [$cat->id, $cat->slug])}}">{{$cat->name}}</a>
+							</li>
+						@endforeach
+					</ul>
 				</div>
 			</div>
 		</div><!--/Desktop Header/-->
@@ -131,7 +134,7 @@
 							<div class="logo-card">
 								<div class="logo">
 									<a href="{{ url('/') }}">
-										<img src="{{ $gtext['front_logo'] ? asset('public/media/'.$gtext['front_logo']) : asset('public/frontend/images/logo.png') }}" alt="logo">
+										<img src="{{ $gtext['front_logo'] ? asset('media/'.$gtext['front_logo']) : asset('frontend/images/logo.png') }}" alt="logo">
 									</a>
 								</div>
 							</div>
@@ -163,7 +166,7 @@
 
 											<div class="empty_card has_item_empty">
 												<div class="empty_img">
-													<img src="{{ asset('public/frontend/images/empty.png') }}" />
+													<img src="{{ asset('frontend/images/empty.png') }}" />
 												</div>
 												<h3>{{ __('Your cart is empty!') }}</h3>
 											</div>
